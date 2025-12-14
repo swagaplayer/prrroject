@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Симулятор ортодонтичної сили</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <h1>Симулятор ортодонтичної сили</h1>
+      <p class="subtitle">Модель: горизонтальна та вертикальна компоненти • рух кількох зубів • візуалізація</p>
+    </div>
+    <nav class="main-nav">
+      <a href="index.html" class="nav-link">Головна</a>
+      <a href="bites.html" class="nav-link">Види прикусів</a>
+      <a href="braces.html" class="nav-link">Брекет-системи</a>
+      <a href="simulator.html" class="nav-link">Симулятор сили</a>
+    </nav>
+  </header>
+
+  <main class="page content">
+    <section class="card">
+      <h2>Налаштування моделі</h2>
+      <div class="controls-grid">
+        <label>Сила, F (Н): <input id="forceN" type="range" min="0" max="1.5" step="0.01" value="0.6"></label>
+        <div class="range-value"> <span id="forceNval">0.60</span> Н</div>
+
+        <label>Кут прикладання, θ (°): <input id="angleDeg" type="range" min="0" max="90" step="1" value="10"></label>
+        <div class="range-value"> <span id="angleVal">10</span>°</div>
+
+        <label>Коефіцієнт жорсткості k (px / (N·cos)) : <input id="kVal" type="range" min="10" max="60" step="1" value="25"></label>
+        <div class="range-value"> <span id="kShown">25</span></div>
+
+        <label>Гасіння (damping): <input id="damping" type="range" min="0" max="1" step="0.01" value="0.12"></label>
+        <div class="range-value"> <span id="dShown">0.12</span></div>
+
+        <label>Кількість зубів: <input id="teethCount" type="number" min="1" max="8" value="5"></label>
+      </div>
+
+      <h3>Формула (спрощено для демонстрації)</h3>
+      <p class="muted">Горизонтальна компонента сили: F<sub>x</sub> = F·cosθ. Вертикальна компонента: F<sub>y</sub> = F·sinθ.</p>
+      <p class="muted">Ум. зсув( px ) ≈ k·F<sub>x</sub> , але з урахуванням демпфування й інерції - модель використовує інтегрування пришвидшення → швидкість → положення.</p>
+    </section>
+
+    <section class="card">
+      <h2>Візуалізація щелепи</h2>
+      <div id="jawArea" class="jaw-area">
+        <!-- SVG-зуби будуть створюватися скриптом у цьому контейнері -->
+      </div>
+      <div id="calcInfo" class="card muted" style="margin-top:12px;"></div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>Модель спрощена. Для медичних висновків звертайтесь до спеціаліста.</p>
+  </footer>
+
+  <script src="script.js"></script>
+  <script src="simulator.js"></script>
+</body>
+</html>
